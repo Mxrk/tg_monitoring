@@ -2,7 +2,7 @@ package com.mxrk;
 
 import com.mxrk.database.Database;
 
-import com.mxrk.utils.keyboard;
+import com.mxrk.utils.Keyboard;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -40,7 +40,7 @@ public class Bot extends TelegramLongPollingBot {
                 //get domains of user
                 message.setText("Here are your monitored domains:");
 
-                keyboard k = new keyboard();
+                Keyboard k = new Keyboard();
                 message.setReplyMarkup(k.listDomains(userid));
 
                 try {

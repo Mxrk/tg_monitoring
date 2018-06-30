@@ -7,7 +7,7 @@ import org.telegram.telegrambots.api.objects.replykeyboard.buttons.InlineKeyboar
 import java.util.ArrayList;
 import java.util.List;
 
-public class keyboard {
+public class Keyboard {
 
     public InlineKeyboardMarkup listDomains(long userid){
         // count of domains
@@ -17,12 +17,12 @@ public class keyboard {
         List<List<InlineKeyboardButton>> rowsInline = new ArrayList<List<InlineKeyboardButton>>();
         List<InlineKeyboardButton> rowInline = new ArrayList<InlineKeyboardButton>();
 
-        // Loop for keyboard creation
+        // Loop for Keyboard creation
         for (int i = 0; i < count; i++) {
             rowInline.add(new InlineKeyboardButton().setText(Database.get(userid).get(i).toString()).setCallbackData(Integer.toString(i)));
         }
 
-        // Set the keyboard to the markup
+        // Set the Keyboard to the markup
         rowsInline.add(rowInline);
         // Add it to the message
         markupInline.setKeyboard(rowsInline);
