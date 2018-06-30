@@ -83,6 +83,50 @@ public class Database {
             return false;
         }
     }
+    public static ArrayList getAll() {
+        ArrayList<String> list = new ArrayList<String>();
+
+        // Todo: if empty, return 0
+        try {
+            stmt = c.createStatement();
+            String sql = "SELECT * FROM user";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                String domain = rs.getString("domain");
+                list.add(domain);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static void check(boolean check, String domain) {
+        if(check){
+            String sql = "UPDATE user SET http = '1' WHERE domain = ?";
+            try {
+                PreparedStatement pstmt = c.prepareStatement(sql);
+                pstmt.setString(1, domain); // set input parameter 1
+                pstmt.executeUpdate(); // execute update statement
+                c.commit();
+            } catch (SQLException exp) {
+                exp.printStackTrace();
+            }
+        }else{
+            try {
+                String sql = "UPDATE user SET http = '0' WHERE domain = ?";
+                PreparedStatement pstmt = c.prepareStatement(sql);
+                pstmt.setString(1, domain); // set input parameter 1
+                pstmt.executeUpdate(); // execute update statement
+                c.commit();
+            } catch (SQLException exp) {
+                exp.printStackTrace();
+            }
+
+        }
+    }
+
 
     public void closeConnection() {
         try {
