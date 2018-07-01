@@ -1,5 +1,7 @@
 package com.mxrk.database;
 
+import com.mxrk.utils.Validate;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -69,7 +71,8 @@ public class Database {
     }
 
     public static boolean add(long id, String domain) {
-        if(domainExists(domain)){
+        String url = Validate.domain(domain);
+        if(domainExists(url)){
             return false;
         }else {
             addUser(id);
@@ -77,7 +80,7 @@ public class Database {
             String sql = "INSERT INTO domains(url, status) VALUES(?,?)";
             try {
                 PreparedStatement st = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                st.setString(1, domain);
+                st.setString(1, url);
                 st.setInt(2, 0);
                 st.executeUpdate();
                 ResultSet rs = st.getGeneratedKeys();
