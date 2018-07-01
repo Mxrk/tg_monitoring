@@ -158,7 +158,7 @@ public class Database {
 
 
     public static void addUser(long userid){
-        String sql = "INSERT if not exists INTO users(userID) VALUES(?)";
+        String sql = "INSERT OR REPLACE INTO users(userID) VALUES(?)";
         try {
             PreparedStatement st = c.prepareStatement(sql);
             st.setLong(1, userid);
@@ -168,7 +168,7 @@ public class Database {
         }
     }
     public static void linkDomain(long userID, int domainID){
-        String sql = "INSERT if not exists INTO users(userID, domainID) VALUES(?,?)";
+        String sql = "INSERT OR REPLACE INTO subs(userID, domainID) VALUES(?,?)";
         try {
             PreparedStatement st = c.prepareStatement(sql);
             st.setLong(1, userID);
